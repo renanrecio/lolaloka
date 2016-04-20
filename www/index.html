@@ -12,6 +12,62 @@
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		
+		
+
+	<link rel="stylesheet" type="text/css" href="FolhaEstilo.css" media="screen" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" ></script> 
+			<!-- Inclusão do Jquery Validate -->
+	<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.6/jquery.validate.js" ></script>
+			 
+
+	<script type="text/javascript">
+	//Verifica se o email já existe no BD 
+			var xmlHttp;
+
+			 
+			function createXMLHttpRequest() {
+			if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if (window.XMLHttpRequest) {
+			xmlHttp = new XMLHttpRequest();
+			}
+			}
+			
+			
+			function startRequest() {
+			createXMLHttpRequest();
+			xmlHttp.onreadystatechange = handleStateChange;
+			
+			xmlHttp.open("GET", "http://54.207.38.125/www/ajax.php", true);
+			
+			
+			xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			
+			xmlHttp.send();
+			
+			
+			
+		
+			}
+
+			
+			function handleStateChange() {
+			if(xmlHttp.readyState == 4) {
+			if(xmlHttp.status == 200) {
+				
+					document.getElementById("contact-email").value = xmlHttp.responseText;
+				
+				
+						
+				
+				
+			}
+			}
+			}
+	</script>
+			
 	</head>
 	<body class="homepage">
 		<div id="page-wrapper">
@@ -166,7 +222,6 @@
 						</header>
 						<hr />
 						<div class="row 150%">
-						
 							<div class="6u 12u(mobile)">
 
 								<!-- Contact Form -->
@@ -177,7 +232,7 @@
 													<input type="text" name="name" id="contact-name" placeholder="Nome" />
 												</div>
 												<div class="6u 12u(mobile)">
-													<input type="text" name="email" id="contact-email" placeholder="Email" />
+													<input type="text" onblur="startRequest()" name="email" id="contact-email" placeholder="Email" />
 												</div>
 											</div>
 											<div class="row 50%">
@@ -188,14 +243,14 @@
 											<div class="row">
 												<div class="12u">
 													<ul class="actions">
-														<li><input type="submit" class="style1" value="Send" /></li>
+														<li><input  type="submit" class="style1" value="Send" /></li>
 														<li><input type="reset" class="style2" value="Reset" /></li>
 													</ul>
 												</div>
 											</div>
 										</form>
 									</section>
-									
+
 							</div>
 							<div class="6u 12u(mobile)">
 
